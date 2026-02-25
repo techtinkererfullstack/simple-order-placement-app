@@ -6,12 +6,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.orderplacement.databinding.ActivityAddOrderScreenBinding
 
 class AddOrderScreen : AppCompatActivity() {
     private lateinit var binding: ActivityAddOrderScreenBinding
+    private lateinit var viewModel: OrderViewModel
 
-    private lateinit var db: AppDatabase
 
     private var orderid = -1
 
@@ -27,8 +28,8 @@ class AddOrderScreen : AppCompatActivity() {
             insets
         }
 
-        //getDatabase function called
-        db = AppDatabase.getDatabase(this)
+        viewModel = ViewModelProvider(this)[OrderViewModel::class.java]
+
 
         orderid =intent.getIntExtra("id",-1)
 
@@ -54,12 +55,12 @@ class AddOrderScreen : AppCompatActivity() {
             if (orderid== -1){
                 //insert
                 val order = Order(address = address,date = date, customerName = customerName, mobileNumber = mobileNumber, productDetails = productDetails, quantity = quantity)
-                db.orderDao().inserOrder(order)
+                viewModel.insertOrderFromViewModel(order)
 
             }else{
                 //Update
                 val order =Order(address = address,orderId = orderid, date = date, customerName = customerName, mobileNumber = mobileNumber, productDetails = productDetails, quantity = quantity)
-                db.orderDao().updateOrder(order)
+               viewModel.updateOrderFromViewModel(order)
             }
             Toast.makeText(this@AddOrderScreen, "Order saved successfully", Toast.LENGTH_SHORT).show()
             finish()
