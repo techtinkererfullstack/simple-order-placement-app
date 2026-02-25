@@ -79,8 +79,6 @@
             android:layout_height="wrap_content"
             />
 
-
-
         <EditText
             android:background="@drawable/edit_text_border"
             android:id="@+id/product_detailsET"
