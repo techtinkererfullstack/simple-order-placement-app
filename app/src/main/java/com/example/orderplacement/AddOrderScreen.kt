@@ -31,9 +31,9 @@ class AddOrderScreen : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[OrderViewModel::class.java]
 
 
-        orderid =intent.getIntExtra("id",-1)
+        orderid = intent.getIntExtra("id", -1)
 
-        if (orderid!=-1){
+        if (orderid != -1) {
 
             binding.dateET.setText(intent.getStringExtra("date"))
             binding.customerNameET.setText(intent.getStringExtra("customerName"))
@@ -52,22 +52,34 @@ class AddOrderScreen : AppCompatActivity() {
             val quantity = binding.quantityET.text.toString()
             val address = binding.addressET.text.toString()
 
-            if (orderid== -1){
+            if (orderid == -1) {
                 //insert
-                val order = Order(address = address,date = date, customerName = customerName, mobileNumber = mobileNumber, productDetails = productDetails, quantity = quantity)
+                val order = Order(
+                    address = address,
+                    date = date,
+                    customerName = customerName,
+                    mobileNumber = mobileNumber,
+                    productDetails = productDetails,
+                    quantity = quantity
+                )
                 viewModel.insertOrderFromViewModel(order)
 
-            }else{
+            } else {
                 //Update
-                val order =Order(address = address,orderId = orderid, date = date, customerName = customerName, mobileNumber = mobileNumber, productDetails = productDetails, quantity = quantity)
-               viewModel.updateOrderFromViewModel(order)
+                val order = Order(
+                    address = address,
+                    orderId = orderid,
+                    date = date,
+                    customerName = customerName,
+                    mobileNumber = mobileNumber,
+                    productDetails = productDetails,
+                    quantity = quantity
+                )
+                viewModel.updateOrderFromViewModel(order)
             }
-            Toast.makeText(this@AddOrderScreen, "Order saved successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddOrderScreen, "Order saved successfully", Toast.LENGTH_SHORT)
+                .show()
             finish()
-
-
         }
-
-
     }
 }

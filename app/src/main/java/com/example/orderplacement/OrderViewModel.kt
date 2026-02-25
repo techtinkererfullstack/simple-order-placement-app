@@ -14,8 +14,8 @@ class OrderViewModel(application: Application): AndroidViewModel(application)  {
         getAllOrderFromViewModel()
     }
 
-    fun getAllOrderFromViewModel():List<Order> {
-        return repository.getAllOrdersRepo()
+    fun getAllOrderFromViewModel(){
+       orderLiveData.value = repository.getAllOrdersRepo()
     }
 
     fun insertOrderFromViewModel(order:Order) {

@@ -51,7 +51,7 @@ class AllOrdersScreen : AppCompatActivity() {
                 },
                 onDelete = {order ->
                    viewModel.deleteOrderFromViewModel(order)
-
+                    viewModel.getAllOrderFromViewModel()
 
                 }
             )
